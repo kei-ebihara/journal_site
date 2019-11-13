@@ -1,0 +1,27 @@
+version: "3.7"
+services:
+  app:
+    build:
+      # Dockerfileの場所を指定
+      context: docker/app/
+      # build時に使用する環境変数を指定
+      args:
+        APP_HOME: $APP_HOME
+    # マウントするディレクトリを指定
+    volumes:
+      - .:${APP_HOME}
+      # docker環境に保存するディレクトリの指定(名前:ディレクトリ)
+      - bundle:${APP_HOME}/vendor/bundle
+      # マウント対象外のディレクトリ
+      - ${APP_HOME}/vendor
+      - ${APP_HOME}/tmp
+      - ${APP_HOME}/log
+      - ${APP_HOME}/.git
+    ports:
+      - '3000:3000'
+# docker環境(volume)に保存するの設定
+volumes:
+  # docker環境に保存するディレクトリの名前
+  bundle:
+    # # bundleを使う際のdriverとしてlocalを指定
+    driver: local
