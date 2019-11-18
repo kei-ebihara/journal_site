@@ -1,0 +1,8 @@
+<h1>論文一覧</h1>
+<ul style="list-style: none;">
+  <% @articles.each do |article| %>
+    <li><%= link_to article.title, article %></li>
+  <% end %>
+</ul>
+
+<%= link_to "投稿する", new_article_path %>

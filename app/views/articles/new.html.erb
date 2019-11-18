@@ -1,0 +1,23 @@
+  <% if @article.errors.any? %>
+    <div class="alert alert-danger">
+      <p><b><%= @article.errors.count %>件のエラーがあります</b></p>
+      <ul>
+      <% @article.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+<h1>論文登録フォーム</h1>
+<%= form_with model: @article, local: true do |form| %>
+  <p>
+    論文タイトル：<br>
+    <%= form.text_field :title %>
+  </p>
+  <p>
+    本文：<br>
+    <%= form.text_area :body %>
+  </p>
+  <%= form.submit "登録" %>
+<% end %>
